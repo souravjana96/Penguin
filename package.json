@@ -15,7 +15,8 @@
     "openai": "^4.12.3",
     "react": "^18",
     "react-dom": "^18",
-    "react-media-recorder": "^1.6.6"
+    "react-media-recorder": "^1.6.6",
+    "react-use-clipboard": "^1.0.9"
   },
   "devDependencies": {
     "autoprefixer": "^10",

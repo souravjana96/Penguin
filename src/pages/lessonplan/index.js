@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { ReactMediaRecorder } from "react-media-recorder";
+import useClipboard from "react-use-clipboard";
 
 const RecordingIcon = ({ classText }) => {
   return (
@@ -26,6 +27,9 @@ const LessonPlan = () => {
     topic: "",
   });
   const [resposeMessage, setResponseMessage] = useState(null);
+  const [isCopied, setCopied] = useClipboard(resposeMessage, {
+    successDuration: 3000,
+  });
   const handleInputStateChange = (e) => {
     setInputData({
       ...inputData,
@@ -45,7 +49,7 @@ const LessonPlan = () => {
         }
       );
       const data = await response.json();
-    //   console.log("Data", data);
+      //   console.log("Data", data);
       setResponseMessage(data.data);
     } catch (error) {
       console.log(error);
@@ -56,12 +60,12 @@ const LessonPlan = () => {
 
     getResponse(inputData.topic);
   };
-  const handleCopyToClipboard = () => {
-    if (textAreaRef.current) {
-      textAreaRef.current.select();
-      document.execCommand("copy");
-    }
-  };
+  //   const handleCopyToClipboard = () => {
+  //     if (textAreaRef.current) {
+  //       textAreaRef.current.select();
+  //       document.execCommand("copy");
+  //     }
+  //   };
   const postAudioFile = async (formData) => {
     try {
       const response = await fetch(`http://localhost:8080/transcript/audio`, {
@@ -69,7 +73,7 @@ const LessonPlan = () => {
         body: formData,
       });
       const data = await response.json();
-    //   console.log("Success", data);
+      //   console.log("Success", data);
       setInputData({ ...inputData, topic: data.data });
     } catch (error) {
       console.log(error);
@@ -152,24 +156,28 @@ const LessonPlan = () => {
             type="button"
             data-tooltip-target="tooltip-fullscreen"
             className="p-2 text-gray-500 rounded cursor-pointer sm:ml-auto hover:text-gray-900 hover:bg-gray-100 dark:text-gray-400 dark:hover:text-white dark:hover:bg-gray-600"
-            onClick={handleCopyToClipboard}
+            // onClick={handleCopyToClipboard}
+            onClick={setCopied}
           >
-            <svg
-              className="h-8 w-8"
-              width="24"
-              height="24"
-              viewBox="0 0 24 24"
-              stroke-width="2"
-              stroke="currentColor"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path stroke="none" d="M0 0h24v24H0z" />{" "}
-              <rect x="8" y="8" width="12" height="12" rx="2" />{" "}
-              <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
-            </svg>
-            <span className="sr-only">Full screen</span>
+            {isCopied ? (
+              "Copied"
+            ) : (
+              <svg
+                className="h-6 w-6"
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                stroke-width="2"
+                stroke="currentColor"
+                fill="none"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                <rect x="8" y="8" width="12" height="12" rx="2" />{" "}
+                <path d="M16 8v-2a2 2 0 0 0 -2 -2h-8a2 2 0 0 0 -2 2v8a2 2 0 0 0 2 2h2" />
+              </svg>
+            )}
           </button>
         </div>
         <div className="px-4 py-2 bg-white rounded-b-lg dark:bg-gray-800">
