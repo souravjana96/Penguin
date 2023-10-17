@@ -24,7 +24,7 @@ export default function Home() {
             <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
               <img
                 src="https://images.unsplash.com/photo-1564144006388-615f4f4abb6e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2071&q=80"
-                alt="Front of men&#039;s Basic Tee in black."
+                alt="Lesson Plans"
                 className="h-full w-full object-cover object-center lg:h-full lg:w-full"
               />
             </div>
