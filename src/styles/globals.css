@@ -6,6 +6,7 @@
   --foreground-rgb: 0, 0, 0;
   --background-start-rgb: 214, 219, 220;
   --background-end-rgb: 255, 255, 255;
+  --gradient-background: linear-gradient(to right, red, yellow);
 }
 
 @media (prefers-color-scheme: dark) {
@@ -18,5 +19,5 @@
 
 body {
   color: rgb(var(--foreground-rgb));
-  background: rgb(var(--background-start-rgb));
+  background: linear-gradient(to right, #6366f1, #ec4899);
 }

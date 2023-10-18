@@ -1,5 +1,11 @@
-import React, { useRef, useState } from "react";
-import { ReactMediaRecorder } from "react-media-recorder";
+import React, { useEffect, useRef, useState } from "react";
+// import { ReactMediaRecorder } from "react-media-recorder";
+import OpenAI from "openai";
+import regeneratorRuntime from "regenerator-runtime";
+import SpeechRecognition, {
+  useSpeechRecognition,
+} from "react-speech-recognition";
+
 import useClipboard from "react-use-clipboard";
 
 const RecordingIcon = ({ classText }) => {
@@ -30,11 +36,52 @@ const LessonPlan = () => {
   const [isCopied, setCopied] = useClipboard(resposeMessage, {
     successDuration: 3000,
   });
+
+  const {
+    transcript,
+    listening,
+    resetTranscript,
+    browserSupportsSpeechRecognition,
+  } = useSpeechRecognition();
+  const startListening = () => {
+    resetTranscript();
+    SpeechRecognition.startListening({ continuous: true });
+  };
+
   const handleInputStateChange = (e) => {
     setInputData({
       ...inputData,
       [e.target.name]: e.target.value,
     });
+  };
+  const handleChat = async (payload) => {
+    const openai = new OpenAI({
+      apiKey: "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",
+      dangerouslyAllowBrowser: true,
+    });
+
+    try {
+      const chatCompletion = await openai.chat.completions.create({
+        messages: [
+          {
+            role: "system",
+            content: "You are a helpful assistant.",
+          },
+          {
+            role: "user",
+            content: payload,
+          },
+        ],
+        model: "gpt-3.5-turbo",
+      });
+
+      const response = chatCompletion.choices[0].message.content;
+
+      setResponseMessage(response);
+    } catch (error) {
+      console.error(error);
+      // Handle errors here
+    }
   };
   const getResponse = async (payload) => {
     try {
@@ -57,8 +104,8 @@ const LessonPlan = () => {
   };
   const handleSubmitData = (e) => {
     e.preventDefault();
-
-    getResponse(inputData.topic);
+    handleChat(inputData.topic);
+    // getResponse(inputData.topic);
   };
   //   const handleCopyToClipboard = () => {
   //     if (textAreaRef.current) {
@@ -80,17 +127,40 @@ const LessonPlan = () => {
     }
   };
 
-  const handleStop = async (blobUrl, blob) => {
-    // console.log("Blob data", blob);
-    const formData = new FormData();
-    formData.append("file", blob, "myBlob.mp3");
-    // console.log("file", formData);
-    postAudioFile(formData);
-  };
-
+  //   const handleStop = async (blobUrl, blob) => {
+  //     // console.log("Blob data", blob);
+  //     const formData = new FormData();
+  //     formData.append("file", blob, "myBlob.mp3");
+  //     // console.log("file", formData);
+  //     postAudioFile(formData);
+  //   };
+  useEffect(() => {
+    setInputData({ ...inputData, topic: transcript });
+  }, [transcript]);
   return (
     <div className="p-10">
       <div className="m-auto w-[600px] justify-center items-center text-center">
+        <h2 className="text-white font-semibold">Speak</h2>
+
+        <div className="mt-2">
+          <button
+            // onMouseDown={startListening}
+            // onMouseOver={SpeechRecognition.stopListening}
+            onClick={
+              listening ? SpeechRecognition.stopListening : startListening
+            }
+            className="bg-white p-4 rounded-full"
+          >
+            <RecordingIcon
+              classText={
+                listening ? "animate-pulse text-red-600" : "text-sky-600"
+              }
+            />
+          </button>
+          <p className="mb-4 h-6">{listening ? "Recording...." : ""}</p>
+        </div>
+      </div>
+      {/* <div className="m-auto w-[600px] justify-center items-center text-center">
         <h2>Speak</h2>
         <ReactMediaRecorder
           audio
@@ -116,7 +186,7 @@ const LessonPlan = () => {
             </div>
           )}
         />
-      </div>
+      </div> */}
       <form className="w-[600px] m-auto" onSubmit={handleSubmitData}>
         <label for="chat" className="sr-only">
           Your message
