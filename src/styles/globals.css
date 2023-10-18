@@ -16,8 +16,11 @@
     --background-end-rgb: 0, 0, 0;
   }
 }
-
+*{
+  font-family: 'Raleway';
+}
 body {
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(to right, #6366f1, #ec4899);
+  font-family: 'Raleway';
 }
