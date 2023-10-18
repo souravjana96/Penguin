@@ -191,6 +191,27 @@ export default function Home() {
             >
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
                 <img
+                  src="https://img.freepik.com/free-vector/male-female-artists-playing-stage-front-audience-cartoon-performers-evening-dresses-singing-drama-song-flat-illustration_74855-18402.jpg?size=626&ext=jpg&ga=GA1.1.1413502914.1697328000&semt=ais"
+                  className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                />
+              </div>
+              <div className="mt-4 px-4 pb-4">
+                <h3 className="text-2xl font-semibold text-center text-black">
+                  Skit
+                </h3>
+                <p className="mt-2 text-base text-black text-center">
+                  Write a few lines of a Skit
+                </p>
+              </div>
+            </div>
+            <div
+              className="group relative shadow-md rounded-md bg-slate-200"
+              onClick={() => {
+                router.push("/lessonplan");
+              }}
+            >
+              <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                <img
                   src="https://images.unsplash.com/photo-1462331940025-496dfbfc7564?auto=format&fit=crop&q=80&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&w=1822"
                   alt="Lesson Plans"
                   className="h-full w-full object-cover object-center lg:h-full lg:w-full"

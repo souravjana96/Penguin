@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 // import { ReactMediaRecorder } from "react-media-recorder";
+// MdArrowBackIosNew
 import OpenAI from "openai";
 import regeneratorRuntime from "regenerator-runtime";
 import SpeechRecognition, {
@@ -7,6 +8,8 @@ import SpeechRecognition, {
 } from "react-speech-recognition";
 
 import useClipboard from "react-use-clipboard";
+import { MdArrowBackIosNew } from "react-icons/md";
+import { useRouter } from "next/router";
 
 const RecordingIcon = ({ isListening }) => {
   return (
@@ -16,7 +19,9 @@ const RecordingIcon = ({ isListening }) => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      class={`w-12 h-12 ${isListening ? "animate-pulse text-red-600" : "text-sky-500"}`}
+      class={`w-12 h-12 ${
+        isListening ? "animate-pulse text-red-600" : "text-sky-500"
+      }`}
     >
       <path
         strokeLinecap="round"
@@ -28,6 +33,7 @@ const RecordingIcon = ({ isListening }) => {
 };
 
 const LessonPlan = () => {
+  const router = useRouter();
   const textAreaRef = useRef(null);
   const [inputData, setInputData] = useState({
     topic: "",
@@ -143,6 +149,13 @@ const LessonPlan = () => {
   }, [transcript]);
   return (
     <div className="p-10">
+      <button
+        onClick={() => {
+          router.push("/");
+        }}
+      >
+        <MdArrowBackIosNew color="white" size={24} className="font-extrabold" />
+      </button>
       <div className="m-auto justify-center items-center text-center">
         <h2 className="text-white font-semibold">Click to Speak</h2>
 
@@ -156,13 +169,13 @@ const LessonPlan = () => {
             className="bg-white p-4 rounded-full"
           >
             <RecordingIcon
-            isListening={listening || false}
-            //   classText={
-            //     listening ? "animate-pulse text-red-600" : "text-black"
-            //   }
+              isListening={listening || false}
+              //   classText={
+              //     listening ? "animate-pulse text-red-600" : "text-black"
+              //   }
             />
           </button>
-          <p className="mb-4 h-6">{listening ? "Recording...." : ""}</p>
+          <p className="mb-4 h-6 text-white">{listening ? "Recording...." : ""}</p>
         </div>
       </div>
       {/* <div className="m-auto w-[600px] justify-center items-center text-center">
@@ -199,8 +212,8 @@ const LessonPlan = () => {
         <div className="flex items-center px-3 py-2 rounded-lg bg-gray-50 dark:bg-gray-700">
           <textarea
             id="chat"
-            rows="1"
-            className="block mx-4 p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+            rows="3"
+            className="block mx-4 p-2.5 w-full text-xl text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-800 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
             placeholder="Send a Message"
             name="topic"
             value={inputData?.topic}
@@ -244,7 +257,7 @@ const LessonPlan = () => {
         </div>
       </form>
       {resposeMessage && (
-        <div className="m-auto max-w-5xl mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
+        <div className="m-auto max-w-5xl mt-4 mb-4 border border-gray-200 rounded-lg bg-gray-50 dark:bg-gray-700 dark:border-gray-600">
           <div className="flex items-center justify-between px-3 py-2 border-b dark:border-gray-600">
             <p className="font-semibold">Response</p>
             <button
