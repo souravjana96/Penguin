@@ -1,7 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 // import { ReactMediaRecorder } from "react-media-recorder";
-// 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
-// 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
 import OpenAI from "openai";
 import regeneratorRuntime from "regenerator-runtime";
 import SpeechRecognition, {
