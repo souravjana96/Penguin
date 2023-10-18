@@ -1,5 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 // import { ReactMediaRecorder } from "react-media-recorder";
+// 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
+// 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
 import OpenAI from "openai";
 import regeneratorRuntime from "regenerator-runtime";
 import SpeechRecognition, {
@@ -56,7 +58,7 @@ const LessonPlan = () => {
   };
   const handleChat = async (payload) => {
     const openai = new OpenAI({
-      apiKey: "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",
+      apiKey: "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",
       dangerouslyAllowBrowser: true,
     });
 
