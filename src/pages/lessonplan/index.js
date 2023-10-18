@@ -8,7 +8,7 @@ import SpeechRecognition, {
 
 import useClipboard from "react-use-clipboard";
 
-const RecordingIcon = ({ classText }) => {
+const RecordingIcon = ({ isListening }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -16,7 +16,7 @@ const RecordingIcon = ({ classText }) => {
       viewBox="0 0 24 24"
       strokeWidth={1.5}
       stroke="currentColor"
-      className={"w-12 h-12" + classText}
+      class={`w-12 h-12 ${isListening ? "animate-pulse text-red-600" : "text-sky-500"}`}
     >
       <path
         strokeLinecap="round"
@@ -86,25 +86,25 @@ const LessonPlan = () => {
       setIsLoading(false);
     }
   };
-//   const getResponse = async (payload) => {
-//     try {
-//       const response = await fetch(
-//         `http://localhost:3000/api/lessonplan/generatetext`,
-//         {
-//           method: "POST",
-//           headers: {
-//             "Content-Type": "application/json",
-//           },
-//           body: JSON.stringify(payload),
-//         }
-//       );
-//       const data = await response.json();
-//       //   console.log("Data", data);
-//       setResponseMessage(data.data);
-//     } catch (error) {
-//       console.log(error);
-//     }
-//   };
+  //   const getResponse = async (payload) => {
+  //     try {
+  //       const response = await fetch(
+  //         `http://localhost:3000/api/lessonplan/generatetext`,
+  //         {
+  //           method: "POST",
+  //           headers: {
+  //             "Content-Type": "application/json",
+  //           },
+  //           body: JSON.stringify(payload),
+  //         }
+  //       );
+  //       const data = await response.json();
+  //       //   console.log("Data", data);
+  //       setResponseMessage(data.data);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   };
   const handleSubmitData = (e) => {
     e.preventDefault();
     SpeechRecognition.stopListening();
@@ -144,7 +144,7 @@ const LessonPlan = () => {
   return (
     <div className="p-10">
       <div className="m-auto justify-center items-center text-center">
-        <h2 className="text-white font-semibold">Speak</h2>
+        <h2 className="text-white font-semibold">Click to Speak</h2>
 
         <div className="mt-2">
           <button
@@ -156,9 +156,10 @@ const LessonPlan = () => {
             className="bg-white p-4 rounded-full"
           >
             <RecordingIcon
-              classText={
-                listening ? "animate-pulse text-red-600" : "text-sky-600"
-              }
+            isListening={listening || false}
+            //   classText={
+            //     listening ? "animate-pulse text-red-600" : "text-black"
+            //   }
             />
           </button>
           <p className="mb-4 h-6">{listening ? "Recording...." : ""}</p>
