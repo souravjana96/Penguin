@@ -10,6 +10,7 @@ import SpeechRecognition, {
 import useClipboard from "react-use-clipboard";
 import { MdArrowBackIosNew } from "react-icons/md";
 import { useRouter } from "next/router";
+import Description from "@/components/Description";
 
 const RecordingIcon = ({ isListening }) => {
   return (
@@ -148,7 +149,7 @@ const LessonPlan = () => {
     setInputData({ ...inputData, topic: transcript });
   }, [transcript]);
   return (
-    <div className="p-10">
+    <div className="p-10 pb-40">
       <button
         onClick={() => {
           router.push("/");
@@ -156,8 +157,11 @@ const LessonPlan = () => {
       >
         <MdArrowBackIosNew color="white" size={24} className="font-extrabold" />
       </button>
+      <Description />
       <div className="m-auto justify-center items-center text-center">
-        <h2 className="text-white font-semibold">Click to Speak</h2>
+        <h2 className="text-white font-semibold h-6">
+          {listening ? "" : "Click to Speak"}
+        </h2>
 
         <div className="mt-2">
           <button
@@ -175,7 +179,9 @@ const LessonPlan = () => {
               //   }
             />
           </button>
-          <p className="mb-4 h-6 text-white">{listening ? "Recording...." : ""}</p>
+          <p className="mb-4 h-6 text-white">
+            {listening ? "Recording...." : ""}
+          </p>
         </div>
       </div>
       {/* <div className="m-auto w-[600px] justify-center items-center text-center">

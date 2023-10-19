@@ -75,7 +75,7 @@ export default function Home() {
             <div
               className="group relative shadow-md rounded-md bg-slate-200"
               onClick={() => {
-                router.push("/lessonplan");
+                router.push("/lessonplan?topic=lesson_plans");
               }}
             >
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -97,7 +97,7 @@ export default function Home() {
             <div
               className="group relative shadow-md rounded-md bg-slate-200"
               onClick={() => {
-                router.push("/lessonplan");
+                router.push("/lessonplan?topic=doubt_clearance");
               }}
             >
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -119,7 +119,7 @@ export default function Home() {
             <div
               className="group relative shadow-md rounded-md bg-slate-200"
               onClick={() => {
-                router.push("/lessonplan");
+                router.push("/lessonplan?topic=multiple_choice_questions");
               }}
             >
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -142,7 +142,7 @@ export default function Home() {
             <div
               className="group relative shadow-md rounded-md bg-slate-200"
               onClick={() => {
-                router.push("/lessonplan");
+                router.push("/lessonplan?topic=essay");
               }}
             >
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -164,7 +164,7 @@ export default function Home() {
             <div
               className="group relative shadow-md rounded-md bg-slate-200"
               onClick={() => {
-                router.push("/lessonplan");
+                router.push("/lessonplan?topic=poetry");
               }}
             >
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -186,7 +186,7 @@ export default function Home() {
             <div
               className="group relative shadow-md rounded-md bg-slate-200"
               onClick={() => {
-                router.push("/lessonplan");
+                router.push("/lessonplan?topic=skit");
               }}
             >
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
@@ -207,7 +207,7 @@ export default function Home() {
             <div
               className="group relative shadow-md rounded-md bg-slate-200"
               onClick={() => {
-                router.push("/lessonplan");
+                router.push("/lessonplan?topic=interesting_facts");
               }}
             >
               <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-t-md bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
